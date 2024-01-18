@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas - WEB</title>
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+</head>
+<style>
+
+</style>
+<body>
+    <div class="container at-4">
+        <div class="row row-cols-6 mt-4" id="box-produk">
+        </div>
+    </div>
+
+    <script>
+        let boxRow = document.getElementById('box-produk')
+
+        fetch('https://dummyjson.com/products').then(res => res.json()).then(data => {
+            let produk = data.products
+            produk.forEach(prodk => {
+                boxRow.innerHTML += `
+                 
+                <div class="col">
+                    <div class="card border-1 mt-4 p-0" style="height:250px">
+                        <img src="${prodk.thumbnail}" class="card-img-top" style="height:150px">
+            
+                        <div class="card-body p-2 fw-semibold" style="font-size:12px">
+                            <p class="m-0 ">${prodk.title}</p>
+                            <p class="card-text m-0">Discount : ${prodk.discountPercentage}%</p>
+                            <p class="card-text m-0">Price : $${prodk.price}</p>
+                            <p class="card-text m-0">Stok : ${prodk.stock}</p>
+                            <p class="card-text m-0">★ ${prodk.rating}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                `
+            });
+            console.log(data)
+            
+        }).catch(error => console.log(error));
+        </script>
+</body>
+</html>
